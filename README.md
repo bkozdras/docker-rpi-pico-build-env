@@ -7,7 +7,6 @@
 [![CIStatus](https://img.shields.io/github/workflow/status/bkozdras/docker-rpi-pico-build-env/docker-rpi-pico-build-env-ci?label=CI%20Status)](CISTATUS)
 
 [![JobBuildDockerImage](https://img.shields.io/badge/Job-Build--Docker--Image-lightgrey)](JOBBUILDOCKERIMAGE)
-
 ![badgeBuildDockerImage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/bkozdras/6b1982a4b959b8684caa029b3414819f/raw/badgeBuildDockerImage.json?service=github)
 
 # What this image contains?
@@ -24,7 +23,7 @@
 - Doxygen
 - Vim
 
-It is enough to use the docker image as for example in CI workflow on github or locally build your own projects.
+It is enough to use the docker image as for example in CI workflow on github. You can also use it to build your own projects locally inside of the running image.
 
 # How to deal with it?
 
@@ -38,6 +37,8 @@ bash buildImage.sh
 After successfull build you can run image and connect to the terminal.
 ```sh
 bash runImage.sh
+cd workspace
 ```
+As workspace the parent directory of this repo is taken.
 
 Enjoy!
