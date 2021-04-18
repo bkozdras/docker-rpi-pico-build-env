@@ -1,4 +1,4 @@
-name: Docker Raspberry PI Pico Build Environment CI
+name: docker-rpi-pico-build-env-ci
 on:
   push:
     paths-ignore:
@@ -6,9 +6,52 @@ on:
       - 'LICENSE'
       - '.gitignore'
 jobs:
-  build-image:
+  wait-for-previous-workflow-finished:
     runs-on: ubuntu-latest
+    timeout-minutes: 90
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: bash ${{ github.workspace }}/buildImage.sh
+      - name: "Block concurrent workflow executions"
+        uses: softprops/turnstyle@v1
+        with:
+          poll-interval-seconds: 10
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  set-unknown-state-badges-for-CI:
+    runs-on: ubuntu-latest
+    needs: wait-for-previous-workflow-finished
+    steps:
+      - name: "Create badge BuildDockerImage with unknown state"
+        uses: schneegans/dynamic-badges-action@v1.0.0
+        with:
+          auth: ${{ secrets.GIST_CI_TOKEN }}
+          gistID: 6b1982a4b959b8684caa029b3414819f
+          filename: badgeBuildDockerImage.json
+          label: Build
+          message: unknown
+          color: grey
+  build-docker-image:
+    runs-on: ubuntu-latest
+    needs: set-unknown-state-badges-for-CI
+    steps:
+      - uses: actions/checkout@v2
+      - name: "Build the Docker image"
+        run: bash ${{ github.workspace }}/buildImage.sh
+      - name: "Create badge BuildDockerImage with passing state"
+        uses: schneegans/dynamic-badges-action@v1.0.0
+        with:
+          auth: ${{ secrets.GIST_CI_TOKEN }}
+          gistID: 6b1982a4b959b8684caa029b3414819f
+          filename: badgeBuildDockerImage.json
+          label: Build
+          message: passing
+          color: green
+      - name: "Create badge BuildDockerImage with failing state"
+        if: ${{ failure() }}
+        uses: schneegans/dynamic-badges-action@v1.0.0
+        with:
+          auth: ${{ secrets.GIST_CI_TOKEN }}
+          gistID: 6b1982a4b959b8684caa029b3414819f
+          filename: badgeBuildDockerImage.json
+          label: Build
+          message: failing
+          color: red
