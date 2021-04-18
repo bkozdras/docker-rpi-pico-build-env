@@ -1,0 +1,14 @@
+name: Docker Raspberry PI Pico Build Environment CI
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+      - 'LICENSE'
+      - '.gitignore'
+jobs:
+  build-image:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: bash ${{ github.workspace }}/buildImage.sh
