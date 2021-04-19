@@ -20,11 +20,10 @@ fi
 echo "docker is available!"
 
 DOCKER_BUILDKIT=1
-CURRENT_DIR=$(pwd)
 NUMBER_OF_CPUS=$(grep -c ^processor /proc/cpuinfo)
 IMAGE_TAG_NAME="nemuuser/rpi-pico-build-env"
+THIS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-echo "CURRENT_DIR=$CURRENT_DIR"
 echo "NUMBER_OF_CPUS=$NUMBER_OF_CPUS"
 echo "IMAGE_TAG_NAME=$IMAGE_TAG_NAME"
 
@@ -32,7 +31,7 @@ $(set -x && docker \
     --log-level debug \
     build \
     --cpu-shares=$NUMBER_OF_CPUS \
-    --file Dockerfile \
+    --file $THIS_DIR/Dockerfile \
     --tag $IMAGE_TAG_NAME:latest \
     --rm=true \
     .)

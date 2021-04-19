@@ -37,6 +37,10 @@ RUN \
         python3-pip                               \
         doxygen                                   \
         vim                                       \
+        git                                       \
     && apt-get autoremove -y
+
+RUN \
+    git config --global advice.detachedHead false
 
 ENV RASPBERRY_PI_PICO_BUILD_ENVIRONMENT_CONTAINER=1
