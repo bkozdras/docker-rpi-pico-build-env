@@ -43,4 +43,26 @@ RUN \
 RUN \
     git config --global advice.detachedHead false
 
+ENV PICO_SDK_VERSION 1.1.2
+ENV PICO_SDK_EXTRAS_VERSION master
+
+RUN \
+    mkdir -p rpi_pico
+
+RUN \
+    cd rpi_pico \
+    && git clone --depth 1 \
+        --branch $PICO_SDK_VERSION https://github.com/raspberrypi/pico-sdk.git \
+    && cd pico-sdk \
+    && git submodule update --recursive --init \
+ENV PICO_SDK_PATH=/rpi_pico/pico-sdk
+
+RUN \
+    cd rpi_pico \
+    && git clone --depth 1 \
+        --branch $PICO_SDK_EXTRAS_VERSION https://github.com/raspberrypi/pico-extras.git \
+    && cd pico-extras \
+    && git submodule update --force --recursive --init --remote
+ENV PICO_EXTRAS_PATH=/rpi_pico/pico-extras
+
 ENV RASPBERRY_PI_PICO_BUILD_ENVIRONMENT_CONTAINER=1
