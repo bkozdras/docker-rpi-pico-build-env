@@ -22,6 +22,9 @@
 - Python3-pip
 - Doxygen
 - Vim
+- Git
+- Raspberry Pi Pico SDK
+- Raspberry Pi Pico Extras
 
 It is enough to use the docker image as for example in CI workflow on github. You can also use it to build your own projects locally inside of the running image.
 
