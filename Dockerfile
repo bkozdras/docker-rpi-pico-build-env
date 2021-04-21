@@ -54,7 +54,7 @@ RUN \
     && git clone --depth 1 \
         --branch $PICO_SDK_VERSION https://github.com/raspberrypi/pico-sdk.git \
     && cd pico-sdk \
-    && git submodule update --recursive --init \
+    && git submodule update --recursive --init
 ENV PICO_SDK_PATH=/rpi_pico/pico-sdk
 
 RUN \
