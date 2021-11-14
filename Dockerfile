@@ -43,8 +43,8 @@ RUN \
 RUN \
     git config --global advice.detachedHead false
 
-ENV PICO_SDK_VERSION 1.1.2
-ENV PICO_SDK_EXTRAS_VERSION master
+ENV PICO_SDK_VERSION 1.3.0
+ENV PICO_SDK_EXTRAS_VERSION sdk-1.3.0
 
 RUN \
     mkdir -p rpi_pico
