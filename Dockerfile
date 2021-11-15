@@ -38,6 +38,7 @@ RUN \
         doxygen                                   \
         vim                                       \
         git                                       \
+        valgrind                                  \
     && apt-get autoremove -y
 
 RUN \
