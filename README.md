@@ -23,8 +23,9 @@
 - Doxygen
 - Vim
 - Git
-- Raspberry Pi Pico SDK
-- Raspberry Pi Pico Extras
+- Raspberry Pi Pico SDK 1.3.0
+- Raspberry Pi Pico Extras 1.3.0
+- Valgrind
 
 It is enough to use the docker image as for example in CI workflow on github. You can also use it to build your own projects locally inside of the running image.
 
