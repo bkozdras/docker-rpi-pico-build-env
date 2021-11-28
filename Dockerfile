@@ -39,6 +39,7 @@ RUN \
         vim                                       \
         git                                       \
         valgrind                                  \
+        cgdb                                      \
     && apt-get autoremove -y
 
 RUN \
